@@ -1,7 +1,6 @@
 package twentyfourhours.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,23 +19,21 @@ public class Candidate {
     private long id;
     private String name;
     private String position;
-    @OneToMany(mappedBy = "candidate",cascade = CascadeType.ALL)
-    List<Vote> votes = new ArrayList<>();
+
+
     @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="party_id",referencedColumnName = "id")
     private Party party;
+    @OneToMany(mappedBy = "candidate",cascade = CascadeType.ALL)
+    List<Votter> votterList = new ArrayList<>();
 
-    public Candidate(String name, String position, List<Vote> votes, Party party) {
+    public Candidate(String name, String position) {
         this.name = name;
         this.position = position;
-        this.votes = votes;
-        this.party = party;
     }
+    public void addVotter(Votter votter){
+        votterList.add(votter);
+        votter.setCandidate(this);
 
-    public void addVote(Vote vote){
-        votes.add(vote);
-        vote.setCandidate(this);
     }
-
 }

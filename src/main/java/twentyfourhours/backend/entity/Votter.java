@@ -1,5 +1,7 @@
 package twentyfourhours.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,17 +12,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Vote {
+public class Votter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String name;
+
+    @JsonBackReference
     @ManyToOne
     private Candidate candidate;
-    @ManyToOne
-    private Party party;
 
-    public Vote(Candidate candidate, Party party) {
-        this.candidate = candidate;
-        this.party = party;
+
+    public Votter(String name) {
+        this.name = name;
+
     }
 }
