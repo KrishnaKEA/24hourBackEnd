@@ -15,5 +15,8 @@ public class PartyService {
     public List<PartyDTO> getAllParty(){
         return PartyDTO.partyToPartyDTOs(partyRepository.findAll());
     }
+    public Party findPartyByName(String partyName){
+        return partyRepository.findPartyByName(partyName);
+    }
 
 }

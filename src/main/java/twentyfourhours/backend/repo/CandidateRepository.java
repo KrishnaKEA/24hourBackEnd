@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface CandidateRepository extends JpaRepository<Candidate,Long> {
     public List<Candidate> getCandidateByPartyName(String name);
+    public void deleteById(long id);
 
 }
